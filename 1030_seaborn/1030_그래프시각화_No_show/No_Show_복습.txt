@@ -1,0 +1,55 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+
+df=pd.read_csv(r'c:\Temp\medical.csv')
+
+
+
+df.head()
+
+
+
+df.columns
+
+
+df.info()
+
+
+
+df.isnull().any(axis=1)
+
+
+
+
+df.isnull().any(axis=0)
+
+
+
+
+df.describe()
+
+
+
+
+df=df[df.Age>=0]
+
+
+
+df['No-show']=df['No-show'].map({'Yes':1,'No':0})
+
+
+
+df['No-show'].value_counts()
+
+
+df['AppointmentDay']=pd.to_datetime(df['AppointmentDay'])
+df['ScheduledDay']=pd.to_datetime(df['ScheduledDay'])
+
+
+
+df['waiting_day']=df['AppointmentDay'].dt.dayofyear-df['ScheduledDay'].dt.dayofyear
+df.info()
